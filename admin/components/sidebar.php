@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/../config/config.php';
+?>
 <!-- Sidebar Start -->
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
@@ -61,11 +64,19 @@
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./index.php" aria-expanded="false">
+                    <a class="sidebar-link" href="<?php echo BASE_URL; ?>/index.php" aria-expanded="false">
                         <span>
                             <i class="ti ti-layout-dashboard"></i>
                         </span>
                         <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?php echo BASE_URL; ?>/wisata/table_wisata.php" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                        </span>
+                        <span class="hide-menu">Wisata</span>
                     </a>
                 </li>
                 <li class="nav-small-cap">
@@ -73,7 +84,7 @@
                     <span class="hide-menu">EXTRA</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./edit_profile.php" aria-expanded="false">
+                    <a class="sidebar-link" href="<?php echo BASE_URL; ?>/edit_profile.php" aria-expanded="false">
                         <span>
                             <i class="ti ti-aperture"></i>
                         </span>
@@ -81,7 +92,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./sample.php" aria-expanded="false">
+                    <a class="sidebar-link" href="<?php echo BASE_URL; ?>/sample.php" aria-expanded="false">
                         <span>
                             <i class="ti ti-aperture"></i>
                         </span>
