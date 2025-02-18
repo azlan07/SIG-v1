@@ -6,7 +6,7 @@ require_once __DIR__ . '/../config/config.php';
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="./index.html" class="logo-container">
+            <a href="index.php" class="logo-container">
                 <div class="logo-wrapper">
                     <i class="ti ti-globe globe-icon"></i>
                     <span class="logo-text">SIG</span>
