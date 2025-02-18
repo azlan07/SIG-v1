@@ -9,15 +9,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">GIS Portal</a>
+            <div class="brand-logo d-flex align-items-center justify-content-between">
+                <a href="index.php" class="logo-container">
+                    <div class="logo-wrapper">
+                        <i class="ti ti-globe globe-icon"></i>
+                        <span class="logo-text">SIG</span>
+                    </div>
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,11 +61,11 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-md-6">
-                    <img src="assets/images/digital-art-with-planet-earth.png" alt="GIS Illustration" class="img-fluid">
+                    <img src="images/digital-art-with-planet-earth.png" alt="GIS Illustration" class="img-fluid">
                 </div>
                 <div class="col-md-6">
-                    <h1 class="display-4">Sistem Informasi Geografis</h1>
-                    <p class="lead">Temukan dan eksplorasi data geografis dengan mudah menggunakan platform GIS kami.</p>
+                    <h1 class="display-3 text-light">Sistem Informasi Geografis</h1>
+                    <p class="lead text-light">Temukan dan eksplorasi data geografis dengan mudah menggunakan platform GIS kami.</p>
                     <a href="#map" class="btn btn-primary btn-lg">Mulai Eksplorasi</a>
                 </div>
             </div>
@@ -61,7 +73,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-5">
+    <section id="features" class="py-5 feature" style="height: 500px;">
         <div class="container">
             <h2 class="text-center mb-5">Fitur Utama</h2>
             <div class="row g-4">
@@ -118,10 +130,10 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-5">
+    <section id="about" class="about py-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-6" style="margin-top: 100px;">
                     <h2>Tentang Platform GIS Kami</h2>
                     <p>Platform GIS kami menyediakan solusi lengkap untuk kebutuhan pemetaan dan analisis data geografis Anda. Dengan antarmuka yang user-friendly dan fitur-fitur canggih, kami membantu Anda mengoptimalkan penggunaan data spasial.</p>
                 </div>
@@ -133,9 +145,9 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5 bg-light">
+    <section id="contact" class="py-5 contact">
         <div class="container">
-            <h2 class="text-center mb-4">Hubungi Kami</h2>
+            <h2 class="text-center text-light mb-4" style="margin-top: 200px;">Hubungi Kami</h2>
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <form id="contactForm">
@@ -180,6 +192,41 @@
     </footer>
 
     <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize map
             const map = L.map('mapContainer').setView([-0.789275, 113.921327], 5); // Indonesia center

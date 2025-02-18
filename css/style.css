@@ -1,0 +1,268 @@
+:root {
+    /* Modern GIS Theme Colors */
+    --primary-dark: #2C3E50;    /* Navy Blue */
+    --primary-mid: #3498DB;     /* Bright Blue */
+    --accent: #E74C3C;         /* Coral Red */
+    --neutral-light: #ECF0F1;  /* Cloud White */
+    --neutral-dark: #34495E;   /* Dark Slate */
+    
+    /* Additional Colors */
+    --text-dark: #2C3E50;
+    --text-light: #ECF0F1;
+    --text-muted: #95A5A6;
+    --card-shadow: rgba(52, 73, 94, 0.1);
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: var(--primary-dark) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.globe-icon {
+    font-size: 28px;
+    color: var(--primary-mid);
+    transition: all 0.5s ease;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.logo-container:hover .globe-icon {
+    transform: rotate(360deg);
+    color: var(--accent);
+}
+
+.logo-container:hover .logo-text {
+    color: var(--primary-mid);
+    transform: scale(1.05);
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-mid) !important;
+}
+
+.btn-light {
+    background: var(--neutral-light);
+    color: var(--primary-dark);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+    background: var(--primary-mid);
+    color: var(--text-light);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    background: linear-gradient(to bottom, var(--primary-dark), var(--primary-mid));
+    padding-bottom: 150px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 101%;
+    height: 350px;
+    background: url('/images/wave-haikei.svg') no-repeat bottom center;
+    background-size: cover;
+    transform: translateX(-1%); /* Geser sedikit ke kiri untuk mengisi celah */
+}
+
+.feature {
+    position: relative;
+}
+
+.feature::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 101%;
+    height: 350px;
+    background: url('/images/wave-haikei-light.svg') no-repeat bottom center;
+    background-size: cover;
+    transform: translateX(-1%); /* Geser sedikit ke kiri untuk mengisi celah */
+}
+
+.btn-primary {
+    background-color: var(--primary-mid);
+    border-color: var(--primary-mid);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* Features Section */
+.card {
+    border: none;
+    box-shadow: 0 4px 15px var(--card-shadow);
+    transition: transform 0.3s ease;
+    background: var(--neutral-light);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-mid);
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    color: var(--primary-dark);
+}
+
+.card-text {
+    color: var(--text-muted);
+}
+
+/* Map Section */
+.bg-light {
+    background-color: var(--neutral-light) !important;
+}
+
+#mapContainer {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--card-shadow);
+}
+
+/* About */
+.about {
+    height: 350px;
+    position: relative;
+    /* background: linear-gradient(to bottom, var(--primary-dark), var(--primary-mid)); */
+    padding-bottom: 150px;
+}
+
+.about::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 80px;
+    width: 101%;
+    height: 100%;
+    background: url('/images/wave-haikei-top-light.svg') no-repeat top center;
+    background-size: cover;
+    transform: translateX(-1%); /* Geser sedikit ke kiri untuk mengisi celah */
+}
+
+/* Contact Section */
+.contact {
+    height: 850px;
+    position: relative;
+    background: linear-gradient(to bottom, var(--primary-dark), var(--primary-mid));
+    padding-bottom: 150px;
+}
+
+.contact::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 80px;
+    width: 101%;
+    height: 100%;
+    background: url('/images/wave-haikei-top.svg') no-repeat top center;
+    background-size: cover;
+    transform: translateX(-1%); /* Geser sedikit ke kiri untuk mengisi celah */
+}
+
+.form-control {
+    border: 2px solid var(--neutral-light);
+    padding: 0.75rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-mid);
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.form-label {
+    color: var(--text-dark);
+}
+
+/* Footer */
+.bg-dark {
+    background-color: var(--primary-dark) !important;
+}
+
+footer {
+    color: var(--text-light);
+}
+
+footer h5 {
+    color: var(--primary-mid);
+}
+
+footer hr {
+    border-color: var(--text-muted);
+    opacity: 0.2;
+}
+
+/* Additional Styles */
+.section-title {
+    color: var(--primary-dark);
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary-mid);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 0 60px;
+    }
+    
+    .logo-text {
+        font-size: 20px;
+    }
+    
+    .globe-icon {
+        font-size: 24px;
+    }
+}
