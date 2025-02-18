@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -36,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mx-4">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home">Beranda</a>
+                        <a class="nav-link" href="#home">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#features">Fitur</a>
@@ -51,32 +53,32 @@
                         <a class="nav-link" href="#contact">Kontak</a>
                     </li>
                 </ul>
-                <a class="btn btn-light" href="login.php">Login</a>
+                <a class="btn btn-primary fw-semibold" href="login.php">Login</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="container h-100">
+        <div class="container">
             <div class="row h-100 align-items-center">
                 <div class="col-md-6">
                     <img src="images/digital-art-with-planet-earth.png" alt="GIS Illustration" class="img-fluid">
                 </div>
                 <div class="col-md-6">
-                    <h1 class="display-3 text-light">Sistem Informasi Geografis</h1>
-                    <p class="lead text-light">Temukan dan eksplorasi data geografis dengan mudah menggunakan platform GIS kami.</p>
-                    <a href="#map" class="btn btn-primary btn-lg">Mulai Eksplorasi</a>
+                    <h1 class="display-3 text-light">SIG - Wisata</h1>
+                    <p class="lead text-light">Sistem Informasi Geografis - Wisata <br>Temukan dan eksplorasi tempat wisata dengan data geografis yang mudah digunakan.</p>
+                    <!-- <a href="#map" class="btn btn-primary btn-lg">Mulai Eksplorasi</a> -->
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-5 feature" style="height: 500px;">
+    <section id="features" class="py-2 feature" style="height: 550px;">
         <div class="container">
             <h2 class="text-center mb-5">Fitur Utama</h2>
-            <div class="row g-4">
+            <div class="row g-4" style="position: relative; z-index: 1;">
                 <div class="col-md-4">
                     <div class="card h-100">
                         <div class="card-body">
@@ -111,20 +113,26 @@
     <!-- Map Section -->
     <section id="map" class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-4">Peta Lokasi Wisata</h2>
             <div class="row mb-4">
                 <div class="col-md-12">
-                    <div class="card">
+                    <div class="card bg-white">
+                        <h2 class="text-center mt-4">Peta Lokasi Wisata</h2>
                         <div class="card-body">
                             <div id="mapContainer" style="height: 500px;"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Daftar Wisata -->
-            <h2 class="text-center mb-4">Wisata</h2>
-            <div class="row" id="wisataList">
-                <!-- Data wisata akan dimuat secara dinamis -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card bg-white p-3" style="position: relative; z-index: 1;">
+                        <!-- Daftar Wisata -->
+                        <h2 class="text-center mb-4">Wisata</h2>
+                        <div class="row" id="wisataList">
+                            <!-- Data wisata akan dimuat secara dinamis -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -133,12 +141,12 @@
     <section id="about" class="about py-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6" style="margin-top: 100px;">
-                    <h2>Tentang Platform GIS Kami</h2>
-                    <p>Platform GIS kami menyediakan solusi lengkap untuk kebutuhan pemetaan dan analisis data geografis Anda. Dengan antarmuka yang user-friendly dan fitur-fitur canggih, kami membantu Anda mengoptimalkan penggunaan data spasial.</p>
+                <div class="col-md-6">
+                    <h2>Tentang Platform SIG Kami</h2>
+                    <p>Platform SIG kami menyediakan informasi lengkap untuk kebutuhan eksplorasi tempat wisata. Dengan antarmuka yang user-friendly dan fitur-fitur canggih, kami membantu Anda mengoptimalkan pencarian lokasi dan informasi yang diperlukan.</p>
                 </div>
                 <div class="col-md-6">
-                    <img src="assets/images/DALL·E 2025-02-15 03.27.20 - A modern and clean 'About Us' section for a landing page. The image features a sleek, minimalist design with a light background. At the center, there'.webp" alt="About GIS" class="img-fluid rounded-4">
+                    <img src="images/digital-art-with-planet-earth.png" width="50%" alt="About GIS" class="img-fluid rounded-4">
                 </div>
             </div>
         </div>
@@ -148,19 +156,19 @@
     <section id="contact" class="py-5 contact">
         <div class="container">
             <h2 class="text-center text-light mb-4" style="margin-top: 200px;">Hubungi Kami</h2>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" style="position: relative; z-index: 1;">
                 <div class="col-md-8">
                     <form id="contactForm">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama</label>
+                            <label for="name" class="form-label text-light">Nama</label>
                             <input type="text" class="form-control" id="name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label text-light">Email</label>
                             <input type="email" class="form-control" id="email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label">Pesan</label>
+                            <label for="message" class="form-label text-light">Pesan</label>
                             <textarea class="form-control" id="message" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Kirim Pesan</button>
@@ -175,18 +183,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>GIS Portal</h5>
-                    <p>Platform Sistem Informasi Geografis untuk kebutuhan pemetaan dan analisis data spasial.</p>
+                    <h5>SIG - Wisata</h5>
+                    <p>Platform Sistem Informasi Geografis untuk kebutuhan eksplorasi tempat wisata.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <h5>Kontak</h5>
-                    <p>Email: info@gisportal.com<br>
+                    <p>Email: info@utie.com<br>
                         Telp: +62 123 456 789</p>
                 </div>
             </div>
             <hr>
             <div class="text-center">
-                <p>&copy; 2025 GIS Portal. All rights reserved.</p>
+                <p>&copy; 2025 UTie - Solution. <br> All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -265,7 +273,7 @@
                         <p><strong>Alamat:</strong> ${wisata.alamat}</p>
                         <p><strong>Harga Tiket:</strong> ${wisata.harga_tiket}</p>
                         <p>${wisata.deskripsi.substring(0, 100)}...</p>
-                        <button class="btn btn-primary btn-sm" onclick="showWisataDetail(${wisata.id_wisata})">Lihat Detail</button>
+                        <button class="btn btn-primary btn-sm w-100" onclick="showWisataDetail(${wisata.id_wisata})">Lihat Detail</button>
                     </div>
                 `;
 
@@ -279,7 +287,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">${wisata.nama_wisata}</h5>
                                 <p class="card-text">${wisata.deskripsi.substring(0, 100)}...</p>
-                                <button class="btn btn-primary btn-sm" onclick="showWisataDetail(${wisata.id_wisata})">Lihat Detail</button>
+                                <button class="btn btn-primary btn-sm w-100" onclick="showWisataDetail(${wisata.id_wisata})">Lihat Detail</button>
                             </div>
                         </div>
                     </div>
@@ -315,7 +323,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
