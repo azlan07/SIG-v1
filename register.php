@@ -49,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Register Admin - SIG Wisata</title>
     <link rel="shortcut icon" type="image/png" href="admin/assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="admin/assets/css/styles.min.css" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>

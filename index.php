@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +55,10 @@
                         <a class="nav-link" href="#contact">Kontak</a>
                     </li>
                 </ul>
-                <a class="btn btn-primary fw-semibold" href="login.php">Login</a>
+                <a class="btn btn-primary fw-semibold"
+                    href="<?php echo isset($_SESSION['admin_logged_in']) ? 'logout.php' : 'login.php'; ?>">
+                    <?php echo isset($_SESSION['admin_logged_in']) ? 'Logout' : 'Login'; ?>
+                </a>
             </div>
         </div>
     </nav>
@@ -269,7 +274,7 @@
                         const popupContent = `
                     <div class="popup-content">
                         <h5>${wisata.nama_wisata}</h5>
-                        <img src="assets/images/wisata/${wisata.foto_wisata}" alt="${wisata.nama_wisata}" style="width:200px;height:150px;object-fit:cover;margin:10px 0;">
+                        <img src="admin/assets/images/wisata/${wisata.foto_wisata}" alt="${wisata.nama_wisata}" style="width:200px;height:150px;object-fit:cover;margin:10px 0;">
                         <p><strong>Alamat:</strong> ${wisata.alamat}</p>
                         <p><strong>Harga Tiket:</strong> ${wisata.harga_tiket}</p>
                         <p>${wisata.deskripsi.substring(0, 100)}...</p>
@@ -283,7 +288,7 @@
                         const wisataCard = `
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
-                            <img src="assets/images/wisata/${wisata.foto_wisata}" class="card-img-top" alt="${wisata.nama_wisata}" style="height:200px;object-fit:cover;">
+                            <img src="admin/assets/images/wisata/${wisata.foto_wisata}" class="card-img-top" alt="${wisata.nama_wisata}" style="height:200px;object-fit:cover;">
                             <div class="card-body">
                                 <h5 class="card-title">${wisata.nama_wisata}</h5>
                                 <p class="card-text">${wisata.deskripsi.substring(0, 100)}...</p>

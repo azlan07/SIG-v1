@@ -15,7 +15,7 @@ function showWisataDetail(id_wisata) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                <img src="assets/images/wisata/${wisata.foto_wisata}" class="img-fluid mb-3" alt="${wisata.nama_wisata}">
+                                <img src="admin/assets/images/wisata/${wisata.foto_wisata}" class="img-fluid mb-3" alt="${wisata.nama_wisata}">
                                 <h6>Alamat:</h6>
                                 <p>${wisata.alamat}</p>
                                 <h6>Deskripsi:</h6>
