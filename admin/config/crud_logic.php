@@ -26,6 +26,38 @@ class Database
     }
 
     /**
+     * Menghitung total record
+     * @param array $conditions Kondisi WHERE (optional)
+     * @return int
+     */
+    public function countAll($conditions = [])
+    {
+        try {
+            $sql = "SELECT COUNT(*) as total FROM {$this->table}";
+            $params = [];
+
+            // Tambahkan WHERE clause
+            if (!empty($conditions)) {
+                $sql .= " WHERE ";
+                $wheres = [];
+                foreach ($conditions as $key => $value) {
+                    $wheres[] = "$key = ?";
+                    $params[] = $value;
+                }
+                $sql .= implode(" AND ", $wheres);
+            }
+
+            $stmt = $this->koneksi->prepare($sql);
+            $stmt->execute($params);
+            $result = $stmt->fetch();
+            return (int)$result['total'];
+        } catch (PDOException $e) {
+            error_log("Count All Error: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
      * Fungsi untuk mendapatkan semua data dari tabel
      * @param array $conditions Kondisi WHERE (opsional)
      * @param array $orderBy Pengurutan data (opsional)

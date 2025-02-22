@@ -115,6 +115,10 @@ try {
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h5 class="card-title fw-semibold">Detail Wisata <?php echo htmlspecialchars($data['nama_wisata']); ?></h5>
                             <div class="d-flex gap-2">
+                                <a href="table_wisata.php" class="btn btn-secondary">
+                                    <i class="ti ti-arrow-left me-1"></i>
+                                    Kembali
+                                </a>
                                 <a href="edit_wisata.php?id=<?php echo $data['id_wisata']; ?>"
                                     class="btn btn-primary"
                                     title="Edit">
@@ -129,10 +133,6 @@ try {
                                     <i class="ti ti-trash me-1"></i>
                                     Hapus
                                 </button>
-                                <a href="table_wisata.php" class="btn btn-secondary">
-                                    <i class="ti ti-arrow-left me-1"></i>
-                                    Kembali
-                                </a>
                             </div>
                         </div>
 

@@ -1,23 +1,17 @@
 <?php
-require_once '../auth_check.php';
-
-require_once '../config/database.php';
-
-// Cek if user is logged in
-if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: login.php');
-    exit;
-}
+require_once 'config/auth_check.php';
+require_once 'config/crud_logic.php';
 
 $success_message = '';
 $error_message = '';
 
+// Inisialisasi Database untuk tabel admin
+$adminDB = new Database('admin', 'id');
+
 // Get current user data
 try {
-    $stmt = $conn->prepare("SELECT * FROM admin WHERE username = ?");
-    $stmt->execute([$_SESSION['admin_username']]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+    $user = $adminDB->getById($_SESSION['admin_id']);
+} catch (Exception $e) {
     $error_message = "Error mengambil data: " . $e->getMessage();
 }
 
@@ -28,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nama = trim($_POST['nama']);
 
         try {
-            $stmt = $conn->prepare("UPDATE admin SET nama = ? WHERE username = ?");
-            $result = $stmt->execute([$nama, $_SESSION['admin_username']]);
+            $result = $adminDB->update($_SESSION['admin_id'], ['nama' => $nama]);
 
             if ($result) {
                 $_SESSION['admin_nama'] = $nama;
@@ -38,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 $error_message = "Gagal mengupdate profile!";
             }
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             $error_message = "Error: " . $e->getMessage();
         }
     } else if (isset($_POST['update_password'])) {
@@ -59,15 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             try {
                 $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-                $stmt = $conn->prepare("UPDATE admin SET password = ? WHERE username = ?");
-                $result = $stmt->execute([$hashed_password, $_SESSION['admin_username']]);
+                $result = $adminDB->update($_SESSION['admin_id'], ['password' => $hashed_password]);
 
                 if ($result) {
                     $success_message = "Password berhasil diupdate!";
                 } else {
                     $error_message = "Gagal mengupdate password!";
                 }
-            } catch (PDOException $e) {
+            } catch (Exception $e) {
                 $error_message = "Error: " . $e->getMessage();
             }
         }
@@ -216,6 +208,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    const closeButton = alert.querySelector('.btn-close');
+                    if (closeButton) {
+                        closeButton.click();
+                    }
+                }, 5000);
+            });
+        });
+    </script>
 
     <!-- Custom Script -->
     <script src="./assets/libs/jquery/dist/jquery.min.js"></script>

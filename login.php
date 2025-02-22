@@ -27,10 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['admin_id'] = $user['id'];
                 $_SESSION['admin_nama'] = $user['nama'];
                 $_SESSION['admin_username'] = $user['username'];
+                $_SESSION['success'] = 'Selamat datang, ' . $user['nama'] . '!';
 
                 header('Location: admin/index.php');
                 exit;
             } else {
+                $_SESSION['error'] = 'Username atau password salah';
                 $error = 'Username atau password salah';
             }
         } catch (PDOException $e) {

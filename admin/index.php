@@ -1,61 +1,59 @@
 <?php
 require_once './config/auth_check.php';
-require_once '../config/database.php';
+require_once './config/connection.php';
 
 try {
     // Query untuk menghitung total wisata
-    $stmt_wisata = $conn->query("SELECT COUNT(*) AS total_wisata FROM wisata");
+    $stmt_wisata = $koneksi->query("SELECT COUNT(*) AS total_wisata FROM wisata");
     $total_wisata = $stmt_wisata->fetchColumn();
 
     // Query untuk menghitung total fasilitas
-    $stmt_fasilitas = $conn->query("SELECT COUNT(*) AS total_fasilitas FROM fasilitas");
-    $total_fasilitas = $stmt_fasilitas->fetchColumn();
+    // $stmt_fasilitas = $koneksi->query("SELECT COUNT(*) AS total_fasilitas FROM fasilitas");
+    // $total_fasilitas = $stmt_fasilitas->fetchColumn();
 
-    // Query untuk menghitung event aktif
-    $stmt_event_aktif = $conn->query("SELECT COUNT(*) AS total_event_aktif FROM event WHERE status = 'aktif'");
-    $total_event_aktif = $stmt_event_aktif->fetchColumn();
+    // // Query untuk menghitung event aktif
+    // $stmt_event_aktif = $koneksi->query("SELECT COUNT(*) AS total_event_aktif FROM event WHERE status = 'aktif'");
+    // $total_event_aktif = $stmt_event_aktif->fetchColumn();
 
-    // Query untuk menghitung total event
-    $stmt_event_total = $conn->query("SELECT COUNT(*) AS total_event FROM event");
-    $total_event = $stmt_event_total->fetchColumn();
+    // // Query untuk menghitung total event
+    // $stmt_event_total = $koneksi->query("SELECT COUNT(*) AS total_event FROM event");
+    // $total_event = $stmt_event_total->fetchColumn();
 
-    // Query untuk menghitung total berita
-    $stmt_berita = $conn->query("SELECT COUNT(*) AS total_berita FROM berita");
-    $total_berita = $stmt_berita->fetchColumn();
+    // // Query untuk menghitung total berita
+    // $stmt_berita = $koneksi->query("SELECT COUNT(*) AS total_berita FROM berita");
+    // $total_berita = $stmt_berita->fetchColumn();
 
-    // Query untuk mendapatkan 5 event terbaru
-    $stmt_latest_events = $conn->query("SELECT nama_event, tanggal_mulai, tanggal_selesai, status 
-                                      FROM event 
-                                      ORDER BY tanggal_mulai DESC 
-                                      LIMIT 5");
-    $latest_events = $stmt_latest_events->fetchAll(PDO::FETCH_ASSOC);
+    // // Query untuk mendapatkan 5 event terbaru
+    // $stmt_latest_events = $koneksi->query("SELECT nama_event, tanggal_mulai, tanggal_selesai, status 
+    //                                   FROM event 
+    //                                   ORDER BY tanggal_mulai DESC 
+    //                                   LIMIT 5");
+    // $latest_events = $stmt_latest_events->fetchAll(PDO::FETCH_ASSOC);
 
-    // Query untuk mendapatkan 5 berita terbaru
-    $stmt_latest_news = $conn->query("SELECT judul_berita, tanggal_posting 
-                                    FROM berita 
-                                    ORDER BY tanggal_posting DESC 
-                                    LIMIT 5");
-    $latest_news = $stmt_latest_news->fetchAll(PDO::FETCH_ASSOC);
+    // // Query untuk mendapatkan 5 berita terbaru
+    // $stmt_latest_news = $koneksi->query("SELECT judul_berita, tanggal_posting 
+    //                                 FROM berita 
+    //                                 ORDER BY tanggal_posting DESC 
+    //                                 LIMIT 5");
+    // $latest_news = $stmt_latest_news->fetchAll(PDO::FETCH_ASSOC);
 
     // Array untuk menyimpan semua data
     $dashboard_data = [
-        'total_wisata' => $total_wisata,
-        'total_fasilitas' => $total_fasilitas,
-        'total_event_aktif' => $total_event_aktif,
-        'total_event' => $total_event,
-        'total_berita' => $total_berita,
-        'latest_events' => $latest_events,
-        'latest_news' => $latest_news
+        'total_wisata' => $total_wisata
+        // 'total_fasilitas' => $total_fasilitas,
+        // 'total_event_aktif' => $total_event_aktif,
+        // 'total_event' => $total_event,
+        // 'total_berita' => $total_berita,
+        // 'latest_events' => $latest_events,
+        // 'latest_news' => $latest_news
     ];
-
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     // Handle error
     error_log("Error: " . $e->getMessage());
     $dashboard_data = [
         'error' => 'Terjadi kesalahan dalam mengambil data'
     ];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -91,137 +89,146 @@ try {
             <?php include 'components/navbar.php'; ?>
 
             <div class="container-fluid">
-            <div class="row">
-    <!-- Card Total Wisata -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Wisata</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dashboard_data['total_wisata']; ?></div>
+                <?php if (isset($_SESSION['success'])): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?php
+                        echo $_SESSION['success'];
+                        unset($_SESSION['success']);
+                        ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-map-marker-alt fa-2x text-gray-300"></i>
+                <?php endif; ?>
+                <div class="row">
+                    <!-- Card Total Wisata -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Wisata</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dashboard_data['total_wisata']; ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-map-marker-alt fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Total Fasilitas -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Fasilitas</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dashboard_data['total_fasilitas']; ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-building fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Event Aktif -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Event Aktif</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dashboard_data['total_event_aktif']; ?> dari <?php echo $dashboard_data['total_event']; ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Total Berita -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Berita</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dashboard_data['total_berita']; ?></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-newspaper fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Card Total Fasilitas -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Fasilitas</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dashboard_data['total_fasilitas']; ?></div>
+                <!-- Tabel Event Terbaru -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Event Terbaru</h6>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-building fa-2x text-gray-300"></i>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Event</th>
+                                        <th>Tanggal Mulai</th>
+                                        <th>Tanggal Selesai</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($dashboard_data['latest_events'] as $event): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($event['nama_event']); ?></td>
+                                            <td><?php echo date('d/m/Y', strtotime($event['tanggal_mulai'])); ?></td>
+                                            <td><?php echo date('d/m/Y', strtotime($event['tanggal_selesai'])); ?></td>
+                                            <td>
+                                                <span class="badge <?php echo $event['status'] == 'aktif' ? 'badge text-bg-success' : ' badge text-bg-secondary'; ?>">
+                                                    <?php echo ucfirst($event['status']); ?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Card Event Aktif -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Event Aktif</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dashboard_data['total_event_aktif']; ?> dari <?php echo $dashboard_data['total_event']; ?></div>
+                <!-- Tabel Berita Terbaru -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Berita Terbaru</h6>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Card Total Berita -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Berita</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $dashboard_data['total_berita']; ?></div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-newspaper fa-2x text-gray-300"></i>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Judul Berita</th>
+                                        <th>Tanggal Posting</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($dashboard_data['latest_news'] as $news): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($news['judul_berita']); ?></td>
+                                            <td><?php echo date('d/m/Y H:i', strtotime($news['tanggal_posting'])); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Tabel Event Terbaru -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Event Terbaru</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Nama Event</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Tanggal Selesai</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($dashboard_data['latest_events'] as $event): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($event['nama_event']); ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($event['tanggal_mulai'])); ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($event['tanggal_selesai'])); ?></td>
-                        <td>
-                            <span class="badge <?php echo $event['status'] == 'aktif' ? 'badge text-bg-success' : ' badge text-bg-secondary'; ?>">
-                                <?php echo ucfirst($event['status']); ?>
-                            </span>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- Tabel Berita Terbaru -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Berita Terbaru</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Judul Berita</th>
-                        <th>Tanggal Posting</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($dashboard_data['latest_news'] as $news): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($news['judul_berita']); ?></td>
-                        <td><?php echo date('d/m/Y H:i', strtotime($news['tanggal_posting'])); ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 
                 <!--  Row 1 -->
                 <div class="row">
@@ -586,6 +593,20 @@ try {
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    const closeButton = alert.querySelector('.btn-close');
+                    if (closeButton) {
+                        closeButton.click();
+                    }
+                }, 5000);
+            });
+        });
+    </script>
 
     <!-- Custom Script -->
     <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
