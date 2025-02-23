@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$name = "db_sig-v1";
+$name = "db_sig";
 
 try {
     // Membuat koneksi PDO
